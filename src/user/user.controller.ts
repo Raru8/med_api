@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { UserDto } from '../dto/user.dto';
 import { UserService } from './user.service';
+import { JwtAuthenticationGuard } from '../authentication/guards/jwt-authentication.guard';
 
 @Controller('user')
 export class UserController {
@@ -10,9 +11,13 @@ export class UserController {
   async create(@Body() data: UserDto){
     return this.userService.create(data);
   }
+}
 
-  @Get(':id')
-  async findUnique(@Param('id') id: number){
-    return this.userService.findUnique(Number(id));
+@Controller('me')
+export class ProfileController {
+  @Get()
+  @UseGuards(JwtAuthenticationGuard)
+  async findMe(@Req() request: any){
+    return request.user
   }
 }
