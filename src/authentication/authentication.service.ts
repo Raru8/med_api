@@ -36,4 +36,10 @@ export class AuthenticationService {
 
     return{ token }
   }
+
+  async validateToken(token: string){
+    return this.jwt.verify(token,{
+      secret: this.configService.get<string>('SECRET_JWT')
+    })
+  }
 }

@@ -11,5 +11,4 @@ export class AuthenticationController {
   async login(@Body() data: AuthenticationDto){
     return this.authentication.authLogin(data)
   }
-
 }

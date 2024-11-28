@@ -10,10 +10,10 @@ import { JwtModule } from '@nestjs/jwt';
       signOptions: {expiresIn: '24h'}
     })
   ],
+  controllers: [AuthenticationController],
   providers: [
     AuthenticationService,
     PrismaService,
   ],
-  controllers: [AuthenticationController]
 })
 export class AuthenticationModule {}
